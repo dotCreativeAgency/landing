@@ -7,7 +7,7 @@
     'use strict';
 
     // Set target launch date: 5 Novembre 2025
-    const launchDate = new Date('2025-11-07T23:59:59');
+    const launchDate = new Date('2025-11-08T23:59:59');
 
     // Get DOM elements
     const daysElement = document.getElementById('days');
