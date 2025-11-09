@@ -68,32 +68,71 @@
     function updateCountdown() {
         const timeRemaining = getTimeRemaining();
 
-        // Update DOM elements with padded values
-        if (daysElement) daysElement.textContent = padNumber(timeRemaining.days);
-        if (hoursElement) hoursElement.textContent = padNumber(timeRemaining.hours);
-        if (minutesElement) minutesElement.textContent = padNumber(timeRemaining.minutes);
-        if (secondsElement) secondsElement.textContent = padNumber(timeRemaining.seconds);
-
-        // If countdown finished, show a message
+        // If countdown finished (date in the past), show "Coming Soon"
         if (timeRemaining.finished) {
             const countdownContainer = document.querySelector('.countdown-container');
             if (countdownContainer) {
                 countdownContainer.innerHTML = `
                     <div style="
-                        background: linear-gradient(135deg, #32D74B 0%, #00A8E8 100%);
+                        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
                         color: white;
-                        padding: 24px;
-                        border-radius: 12px;
-                        font-size: 1.5rem;
-                        font-weight: 700;
+                        padding: 40px 32px;
+                        border-radius: 20px;
                         text-align: center;
+                        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                        border: 1px solid rgba(255, 255, 255, 0.1);
                     ">
-                        🎉 Siamo Live! 🎉
+                        <div style="font-size: 3.5rem; margin-bottom: 16px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));">⏳</div>
+                        <div style="
+                            font-size: 2.2rem; 
+                            font-weight: 800; 
+                            margin-bottom: 12px;
+                            letter-spacing: 1px;
+                            background: linear-gradient(135deg, #FFD23F 0%, #FF6B35 100%);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            background-clip: text;
+                        ">
+                            IN ARRIVO
+                        </div>
+                        <div style="
+                            font-size: 1.1rem; 
+                            opacity: 0.9;
+                            line-height: 1.6;
+                            max-width: 320px;
+                            margin: 0 auto;
+                            font-weight: 400;
+                        ">
+                            Prodotti esclusivi a prezzi che non troverai altrove.<br>Solo per te.
+                        </div>
+                        <div style="
+                            margin-top: 24px;
+                            padding-top: 24px;
+                            border-top: 1px solid rgba(255, 255, 255, 0.15);
+                        ">
+                            <div style="
+                                display: inline-flex;
+                                align-items: center;
+                                gap: 8px;
+                                font-size: 0.9rem;
+                                opacity: 0.8;
+                            ">
+                                <span style="font-size: 1.2rem;">🔔</span>
+                                <span>Ti avviseremo al lancio</span>
+                            </div>
+                        </div>
                     </div>
                 `;
             }
             clearInterval(countdownInterval);
+            return;
         }
+
+        // Update DOM elements with padded values (countdown active)
+        if (daysElement) daysElement.textContent = padNumber(timeRemaining.days);
+        if (hoursElement) hoursElement.textContent = padNumber(timeRemaining.hours);
+        if (minutesElement) minutesElement.textContent = padNumber(timeRemaining.minutes);
+        if (secondsElement) secondsElement.textContent = padNumber(timeRemaining.seconds);
     }
 
     /**
